@@ -22,10 +22,26 @@ describe("mechanic-sms", function () {
     });
 
     it(" -> sms should be delivered to spesified number", function (done) {
-        mechanicSms.sendSMS("905416258925", "Naber yarrağım?").then(function (results) {
-            done();
+
+        mechanicSms.sendSMS(["905416258925", "05313787806"], "Wasssap up?").then(function (results) {
+            var isOK = true;
+            var messages = [];
+            results.forEach(function(result) {
+                if (result.status !== "success") {
+                    isOK = false;
+                    messages.push(result.message);
+                }
+            });
+
+            if(!isOK) {
+                done(new Error(messages));
+            }
+            else {
+                done();
+            }
+
         }).catch(function(error) {
-            done();
+            done(error);
         });
     });
 });
