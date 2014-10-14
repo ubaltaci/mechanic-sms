@@ -22,7 +22,7 @@ describe("mechanic-sms", function () {
     });
 
     it(" -> sms should be delivered to spesified number", function (done) {
-        mechanicSms.sendSMS("05416258925", "Naber yarrağım?").then(function (results) {
+        mechanicSms.sendSMS("905416258925", "Naber yarrağım?").then(function (results) {
             done();
         }).catch(function(error) {
             done();
