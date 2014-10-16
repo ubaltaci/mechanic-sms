@@ -65,6 +65,8 @@ describe("Mechanic SMS Test", function () {
 
         it.skip("should do what for empty list", function (done) {
             mechanicSms.sendSMS([], msgToSend).then(function (results) {
+                console.log(results);
+                console.log(results.length);
                 done();
             }).catch(function (error) {
                 done(error);
