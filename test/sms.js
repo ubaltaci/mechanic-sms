@@ -20,31 +20,20 @@ describe("Mechanic SMS Test", function () {
             }).to.throw(Error);
         });
 
-        it("should fail with authKey and/or authSecret missing in credentials", function () {
+        it("should fail with if credentials not exist for defined provider", function () {
             expect(function () {
-                new MechanicSms(senderAlias, provider, {
-                    "authKey": "",
-                    "authSecret": ""
-                });
+                new MechanicSms(senderAlias, provider, {});
             }).to.throw(Error);
             expect(function () {
                 new MechanicSms(senderAlias, provider, {
-                    "authKey": "*******"
-                });
-            }).to.throw(Error);
-            expect(function () {
-                new MechanicSms(senderAlias, provider, {
-                    "authSecret": "******"
+                    "someOtherProvider": "******"
                 });
             }).to.throw(Error);
         });
 
         it("should fail with not valid provider name", function () {
             expect(function () {
-                new MechanicSms(senderAlias, "*****", {
-                    "authKey": "",
-                    "authSecret": ""
-                });
+                new MechanicSms(senderAlias, "*****");
             }).to.throw(Error);
         });
     });
@@ -63,18 +52,16 @@ describe("Mechanic SMS Test", function () {
             }
         });
 
-        it.skip("should do what for empty list", function (done) {
+        it("should do what for empty list", function (done) {
             mechanicSms.sendSMS([], msgToSend).then(function (results) {
-                console.log(results);
-                console.log(results.length);
                 done();
             }).catch(function (error) {
                 done(error);
             });
         });
 
-        it.skip("should deliver sms to valid numbers", function (done) {
-            var phoneNumbers = ["5313787806", "05351035351"];
+        it("should deliver sms to valid numbers", function (done) {
+            var phoneNumbers = ["5416258925", "05351035351"];
             mechanicSms.sendSMS(phoneNumbers, msgToSend).then(function (results) {
                 var isOK = true;
                 var messages = [];

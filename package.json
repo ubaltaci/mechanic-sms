@@ -1,6 +1,6 @@
 {
   "name": "mechanic-sms",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Mechanic - one way sms",
   "main": "index.js",
   "scripts": {
