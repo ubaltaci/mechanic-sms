@@ -7,10 +7,12 @@ var MechanicSms = require("../lib/mechanic-sms");
 
 var expect = require("chai").expect;
 var credentials;
-var mechanicSms;
+var mechanicSmsForNexmo;
+var mechanicSmsForTwilio;
 
 describe("Mechanic SMS Test", function () {
     var provider = "NEXMO";
+    var provider2 = "TWILIO";
     var senderAlias = "TEST";
 
     describe("Not Valid Parameters", function () {
@@ -39,12 +41,13 @@ describe("Mechanic SMS Test", function () {
     });
 
     describe("Valid Credentials", function () {
-        var msgToSend = "Merhaba, inanılmaz fırsatlar seni bekliyor, http://goo.gl/od8tlB linkine tıkla, MacBook Pro kazanma şansını kaçırma";
+        var msgToSend = "Merhabaa, inanılmaz fırsatlar seni bekliyor, http://goo.gl/od8tlB linkine tıkla, MacBook Pro kazanma şansını kaçırma";
 
         before(function (done) {
             try {
                 credentials = require("./credentials.json");
-                mechanicSms = new MechanicSms(senderAlias, provider, credentials);
+                mechanicSmsForNexmo = new MechanicSms(senderAlias, provider, credentials);
+                mechanicSmsForTwilio = new MechanicSms("+12248364941", provider2, credentials);
                 done();
             }
             catch (error) {
@@ -53,16 +56,26 @@ describe("Mechanic SMS Test", function () {
         });
 
         it("should do what for empty list", function (done) {
-            mechanicSms.sendSMS([], msgToSend).then(function (results) {
+            mechanicSmsForNexmo.sendSMS([], msgToSend).then(function (results) {
                 done();
             }).catch(function (error) {
                 done(error);
             });
         });
 
-        it("should deliver sms to valid numbers", function (done) {
-            var phoneNumbers = ["5416258925", "05351035351"];
-            mechanicSms.sendSMS(phoneNumbers, msgToSend).then(function (results) {
+        it("should deliver sms to valid numbers for twilio", function (done) {
+            var phoneNumbers = ["5416258925"];
+            mechanicSmsForTwilio.sendSMS(phoneNumbers, msgToSend).then(function (results) {
+                expect(results).to.have.length(phoneNumbers.length);
+                done();
+            }).catch(function (error) {
+                done(error);
+            });
+        });
+
+        it("should deliver sms to valid numbers for nexmo", function (done) {
+            var phoneNumbers = ["5416258925"];
+            mechanicSmsForNexmo.sendSMS(phoneNumbers, msgToSend).then(function (results) {
                 var isOK = true;
                 var messages = [];
                 results.forEach(function (result) {

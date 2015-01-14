@@ -1,17 +1,17 @@
 {
   "name": "mechanic-sms",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Mechanic - one way sms",
   "main": "index.js",
   "scripts": {
     "test": "gulp test"
   },
   "repository": {
-      "type": "git",
-      "url": "git://github.com/ubaltaci/mechanic-sms.git"
+    "type": "git",
+    "url": "git://github.com/ubaltaci/mechanic-sms.git"
   },
   "bugs": {
-      "url": "https://github.com/ubaltaci/mechanic-sms/issues"
+    "url": "https://github.com/ubaltaci/mechanic-sms/issues"
   },
   "homepage": "https://github.com/ubaltaci/mechanic-sms",
   "license": "MIT",
@@ -19,7 +19,8 @@
     "bluebird": "^2.3.5",
     "escape-turkish": "0.0.3",
     "lodash": "^2.4.1",
-    "request": "^2.45.0"
+    "request": "^2.45.0",
+    "twilio": "^1.10.0"
   },
   "devDependencies": {
     "chai": "^1.9.2",
